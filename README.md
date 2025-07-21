@@ -38,8 +38,8 @@ src/
 
 ```bash
 # Clone the repository
-git clone https://github.com/max-tonny8/pumpswap-trading-bot-v0.git
-cd pumpswap-trading-bot-v0
+git clone https://github.com/michalstefanow/pumpswap-copytrading-bot.git
+cd pumpswap-copytrading-bot
 
 # Install dependencies
 npm install
@@ -218,12 +218,6 @@ Built-in performance monitoring includes:
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-- **Telegram**: [t.me/FroganBee.sol](https://t.me/froganbee_sol)
-- **X**: [x.com/FroganBee.sol](https://x.com/froganbee_sol)
-- **Email**: tonnyjansen0831@gmail.com
 
 ## 🔄 Changelog
 

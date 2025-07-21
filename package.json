@@ -1,13 +1,21 @@
 {
     "name": "pump-swap-trading-bot",
     "version": "2.0.0",
-    "main": "index.js",
-    "types": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "author": "pumpdotfun",
     "scripts": {
-        "dev": "ts-node index.ts",
+        "dev": "ts-node src/index.ts",
         "build": "tsc",
-        "start": "ts-node index.ts"
+        "start": "node dist/index.js",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "lint": "eslint src/**/*.ts",
+        "lint:fix": "eslint src/**/*.ts --fix",
+        "format": "prettier --write src/**/*.ts",
+        "clean": "rimraf dist",
+        "prebuild": "npm run clean",
+        "postinstall": "npm run build"
     },
     "keywords": [
         "pumpswap",
@@ -15,10 +23,12 @@
         "node",
         "module",
         "trading bot",
-        "solana"
+        "solana",
+        "defi",
+        "automated trading"
     ],
-    "license": "ISC",
-    "description": "This is core SDK for pumpdotfun offical AMM pool - PumpSwap",
+    "license": "MIT",
+    "description": "High-performance Solana trading bot for Pumpswap with automated market cap monitoring and risk management",
     "dependencies": {
         "@pump-fun/pump-swap-sdk": "^0.0.1-beta.22",
         "@solana/spl-token": "^0.4.13",
@@ -31,8 +41,28 @@
     },
     "devDependencies": {
         "@types/bn.js": "^5.1.6",
+        "@types/node": "^20.0.0",
+        "@typescript-eslint/eslint-plugin": "^6.0.0",
+        "@typescript-eslint/parser": "^6.0.0",
+        "eslint": "^8.0.0",
+        "jest": "^29.0.0",
+        "@types/jest": "^29.0.0",
         "prettier": "^3.2.4",
+        "rimraf": "^5.0.0",
+        "ts-jest": "^29.0.0",
         "ts-node": "^10.9.2",
         "typescript": "^5.8.2"
-    }
+    },
+    "engines": {
+        "node": ">=18.0.0",
+        "npm": ">=8.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/max-tonny8/pumpswap-trading-bot-v0.git"
+    },
+    "bugs": {
+        "url": "https://github.com/max-tonny8/pumpswap-trading-bot-v0/issues"
+    },
+    "homepage": "https://github.com/max-tonny8/pumpswap-trading-bot-v0#readme"
 }

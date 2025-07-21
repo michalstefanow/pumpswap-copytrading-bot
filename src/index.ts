@@ -1,43 +1,50 @@
-import { PublicKey } from "@solana/web3.js";
-import { main_menu_display, rl, screen_clear } from "./cli";
-import { readSettings, saveSettingsToFile, sleep } from "./utils/utils";
-import { autoBuy } from "./layout/buy";
-import { totalSell } from "./layout/sell";
+import { cliInterface } from './cli/CLIInterface'
+import { logger } from './utils/logger'
+import { configManager } from './config'
 
-export const init = () => {
-    screen_clear();
-    console.log("Pumpswap Trading Bot");
-
-    main_menu_display();
-
-    rl.question("\t[Main] - Choice: ", async (answer: string) => {
-        let choice = parseInt(answer);
-        switch (choice) {
-            case 1:
-                checkSettings();
-                break;
-            case 2:
-                autoBuy();
-                break;
-            case 3:
-                totalSell();
-                break;
-            case 4:
-                process.exit(1);
-            default:
-                console.log("\tInvalid choice!");
-                await sleep(3000);
-                init();
-                break;
-        }
-    })
+async function main() {
+  try {
+    // Initialize configuration
+    logger.info('Initializing Pumpswap Trading Bot...')
+    
+    // Validate configuration
+    const config = configManager.getConfig()
+    logger.info('Configuration loaded successfully')
+    
+    // Start CLI interface
+    await cliInterface.start()
+    
+  } catch (error) {
+    logger.error(`Failed to start bot: ${error}`)
+    console.error('❌ Bot initialization failed. Please check your configuration.')
+    process.exit(1)
+  }
 }
 
-const checkSettings = async () => {
-    let data = readSettings()
+// Handle graceful shutdown
+process.on('SIGINT', () => {
+  logger.info('Received SIGINT, shutting down gracefully...')
+  process.exit(0)
+})
 
-    console.log("Current settings of Pumpswap Trading bot...")
-    console.log(data)
-}
+process.on('SIGTERM', () => {
+  logger.info('Received SIGTERM, shutting down gracefully...')
+  process.exit(0)
+})
 
-init()
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  logger.error(`Uncaught exception: ${error}`)
+  process.exit(1)
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error(`Unhandled rejection at ${promise}, reason: ${reason}`)
+  process.exit(1)
+})
+
+// Start the application
+main().catch((error) => {
+  logger.error(`Main function error: ${error}`)
+  process.exit(1)
+})

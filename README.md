@@ -232,4 +232,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+## Contact
+- Telegram [michalstefanow](https://t.me/mylord1_1)
+- Twitter [michalstefanow](https://x.com/michalstefanow)
+
 **⚠️ Disclaimer**: This software is for educational purposes only. Use at your own risk. The authors are not responsible for any financial losses.
